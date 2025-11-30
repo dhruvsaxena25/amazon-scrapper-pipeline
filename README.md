@@ -62,6 +62,20 @@ print(f"Success: {product_artifact.scraped_count}")
 - `wait_timeout`: int - Element wait timeout in seconds (default: 10)
 - `page_load_timeout`: int - Page load timeout in seconds (default: 20)
 
+
+### URLs JSON Format (urls.json)
+- If you want to run the product pipeline standalone, create a JSON file with this structure:
+**Simple Structure (Pseudo):**
+```
+{
+  "total_products": 2,
+  "total_urls": 3,
+  "products": {
+    "search_term_1": {"count": 1, "urls": ["https://www.amazon.in/....."]},
+    "search_term_2": {"count": 2, "urls": ["https://www.amazon.in/.....", "https://www.amazon.in/....."]}
+  }
+}
+```
 ### Run standalone:
 ```bash
 # Edit the url_file_path in main() first
@@ -179,3 +193,4 @@ scrapper/
     └── main_utils.py
 
 ```
+### **This project is proprietary. No one is allowed to use, copy, modify, or distribute any part of this code without explicit permission.**  
