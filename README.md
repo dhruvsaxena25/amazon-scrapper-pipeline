@@ -9,7 +9,7 @@ Collects product URLs from Amazon search results.
 ### Usage:
 
 ```python
-from url_pipeline import AmazonUrlScrapingPipeline
+from scrapper.pipeline.url_pipeline import AmazonUrlScrapingPipeline
 
 # Initialize and run
 pipeline = AmazonUrlScrapingPipeline(
@@ -43,11 +43,11 @@ Scrapes detailed product information from a JSON file of URLs.
 ### Usage:
 
 ```python
-from product_pipeline import AmazonProductScrapingPipeline
+from scrapper.pipeline.prodcut_pipeline import AmazonProductScrapingPipeline
 
 # Initialize with URL file path
 pipeline = AmazonProductScrapingPipeline(
-    url_file_path="Artifacts/2024_11_30_22_15_30/UrlData/urls.json",
+    url_file_path="Artifacts/<timestamp>/UrlData/urls.json",
     headless=False
 )
 
@@ -89,26 +89,22 @@ python product_pipeline.py
 ### Option 1: Run together programmatically
 
 ```python
-from url_pipeline import AmazonUrlScrapingPipeline
-from product_pipeline import AmazonProductScrapingPipeline
+from scrapper.pipeline.main_pipeline import AmazonScrapingPipeline
 
-# Step 1: Scrape URLs
-url_pipeline = AmazonUrlScrapingPipeline(
-    search_terms=['gaming laptop', 'wireless keyboard'],
-    target_links=[10, 5],
-    headless=True
+pipeline = AmazonScrapingPipeline(
+            search_terms=['wireless mouse'],
+            target_links= 1,  # 1 wireless mouse
+            headless= True  # Set to False to see browser
 )
-url_artifact = url_pipeline.run()
 
-# Step 2: Scrape products using the URL file
-product_pipeline = AmazonProductScrapingPipeline(
-    url_file_path=url_artifact.url_file_path,
-    headless=True
-)
-product_artifact = product_pipeline.run()
+# Execute complete pipeline
+url_artifact, product_artifact = pipeline.run_pipeline()
 
-print(f"URLs: {url_artifact.url_file_path}")
-print(f"Products: {product_artifact.product_file_path}")
+# Access results
+print(f"\n✅ Pipeline completed!")
+print(f"📁 URLs: {url_artifact.url_file_path}")
+print(f"📁 Products: {product_artifact.product_file_path}")
+
 ```
 
 ### Option 2: Run independently
@@ -117,7 +113,7 @@ print(f"Products: {product_artifact.product_file_path}")
 # Day 1: Collect URLs
 python url_pipeline.py
 
-# Output: URLs saved to: Artifacts/2024_11_30_22_15_30/UrlData/urls.json
+# Output: URLs saved to: Artifacts/<timestamp>/UrlData/urls.json
 
 # Day 2: Edit product_pipeline.py with the correct path, then run
 python product_pipeline.py

@@ -47,7 +47,7 @@ class AmazonLocators:
     
     def __init__(self, config_path: str = None):
         if config_path is None:
-            config_path = Path("scrapper") / "config" / "urls_locators.yaml"
+            config_path = Path(__file__).parent.parent / "config" / "urls_locators.yaml"
         
         self.config_path = Path(config_path)
         self._load_locators()
