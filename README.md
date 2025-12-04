@@ -55,6 +55,30 @@ uvicorn scrapper.router.api:app --host 127.0.0.1 --port 8080 --reload
 # Option 4: Run on all network interfaces
 uvicorn scrapper.router.api:app --host 0.0.0.0 --port 8080
 ```
+---
+
+### Running the API Using `main.py`
+
+If you prefer starting the server through a single entry-point script:
+
+```bash
+python main.py
+```
+
+This assumes `main.py` internally launches the FastAPI server (for example using `uvicorn.run()`).
+
+---
+
+### Running the API Programmatically using `Uvicorn`
+
+Start it from the command line:
+  
+```bash
+uvicorn scrapper.router.api:app --reload --host 127.0.0.1 --port 8080
+
+```
+
+---
 
 **Understanding the uvicorn command:**
 - `scrapper.router.api:app` → The `app` object inside `scrapper/router/api.py` file (`app = FastAPI()`)
