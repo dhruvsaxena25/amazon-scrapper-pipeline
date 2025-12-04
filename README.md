@@ -43,8 +43,8 @@ pip install fastapi uvicorn selenium webdriver-manager pydantic jinja2 python-mu
 ### Running the FastAPI Server
 
 ```bash
-# Option 1: Run api.py directly (if uvicorn.run is inside)
-python -m scrapper.router.api
+# Option 1: Run main.py directly (if uvicorn.run is inside)
+python main.py 
 
 # Option 2: Use uvicorn from command line
 uvicorn scrapper.router.api:app --host 127.0.0.1 --port 8080
@@ -57,28 +57,6 @@ uvicorn scrapper.router.api:app --host 0.0.0.0 --port 8080
 ```
 ---
 
-### Running the API Using `main.py`
-
-If you prefer starting the server through a single entry-point script:
-
-```bash
-python main.py
-```
-
-This assumes `main.py` internally launches the FastAPI server (for example using `uvicorn.run()`).
-
----
-
-### Running the API Programmatically using `Uvicorn`
-
-Start it from the command line:
-  
-```bash
-uvicorn scrapper.router.api:app --reload --host 127.0.0.1 --port 8080
-
-```
-
----
 
 **Understanding the uvicorn command:**
 - `scrapper.router.api:app` → The `app` object inside `scrapper/router/api.py` file (`app = FastAPI()`)
