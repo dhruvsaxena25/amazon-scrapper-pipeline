@@ -170,7 +170,7 @@ Content-Type: application/json
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
 | `search_terms` | `list[str]` | required | List of Amazon search terms |
-| `target_links` | `int | list[int]` | required | URLs to scrape per term |
+| `target_links` | `int` | `list[int] | required | URLs to scrape per term |
 | `headless` | `bool` | `true` | Run browser in headless mode |
 | `return_url_data` | `bool` | `false` | Include URL data in response |
 | `return_prod_data` | `bool` | `false` | Include product data in response |
@@ -453,8 +453,8 @@ print(f"✅ Products: {product_data['total_scraped']}")
 **Parameters:**
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
-| `search_terms` | `list[str] | str` | required | Amazon search terms |
-| `target_links` | `int | list[int]` | 5 | URLs per search term |
+| `search_terms` | `list[str]` | str | required | Amazon search terms |
+| `target_links` | `int` | list[int] | 5 | URLs per search term |
 | `headless` | `bool` | False | Run in headless mode |
 | `wait_timeout` | `int` | 5 | Wait timeout (seconds) |
 | `page_load_timeout` | `int` | 15 | Page load timeout (seconds) |
@@ -470,7 +470,7 @@ url_artifact, url_data, product_artifact, product_data = pipeline.run_pipeline()
 | Variable | Type | Description |
 |----------|------|-------------|
 | `url_artifact` | `UrlDataArtifact` | Contains `url_file_path` |
-| `url_data` | `dict | None` | URL data if `return_url_data=True`, else `None` |
+| `url_data` | `dict` | None | URL data if `return_url_data=True`, else `None` |
 | `product_artifact` | `ProductDataArtifact` | Contains `product_file_path`, `scraped_count`, `failed_count` |
 | `product_data` | `dict | None` | Product data if `return_prod_data=True`, else `None` |
 
@@ -816,7 +816,7 @@ This software is proprietary. No part of this code may be used, copied, modified
 ## 👨‍💻 Support
 
 For support, bug reports, or feature requests:
-- 📧 Email: support@example.com
+- 📧 Email: support.dhruv@dhruvsaxena25.com
 - 🐛 Issues: Create an issue on the repository
 - 📖 Documentation: http://127.0.0.1:8080/docs (when server is running)
 
@@ -847,7 +847,11 @@ For interactive API documentation with live testing capabilities, visit:
 
 ---
 
-**Made with ❤️ for Amazon scraping workflows**
+**Made with ❤️ for Amazon scraping workflows by Dhruv Saxena**
+
+---
+
+**Also Visit: [dhruvsaxena25.com](https://dhruvsaxena25.com/) for more details.**
 
 ---
 
