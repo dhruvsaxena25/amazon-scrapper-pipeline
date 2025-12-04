@@ -318,12 +318,16 @@ class AmazonProductScraper:
     
     # ==================== Public API ====================
     
-    def run(self) -> ProductDataArtifact:
+    def run(self, return_data: bool = False) -> ProductDataArtifact:
         """
         Main scraping workflow - loads URLs, scrapes all products, saves to single JSON.
-        
+
+        Args:
+            return_data: If True, also return the scraped data dict in addition to the artifact.
+
         Returns:
-            ProductDataArtifact with file path and statistics
+            - If return_data is False (default): ProductDataArtifact
+            - If return_data is True: (ProductDataArtifact, dict)  # (artifact, data)
         """
         try:
             # Step 1: Load URLs from artifact
@@ -400,14 +404,18 @@ class AmazonProductScraper:
             log.info(f"📁 Saved to: {self.product_cfg.product_file_path}")
             log.info(f"{'='*70}\n")
             
-            # Return artifact with results
-            return ProductDataArtifact(
+            artifact = ProductDataArtifact(
                 product_data_dir=self.product_cfg.product_data_dir,
                 product_file_path=self.product_cfg.product_file_path,
                 scraped_count=self.scraped_count,
                 failed_count=self.failed_count
             )
             
+            # NEW: optionally return the data as well
+            if return_data:
+                return artifact, final_payload
+            return artifact
+
         except CustomException:
             raise
         except Exception as e:

@@ -303,13 +303,17 @@ class AmazonUrlScraper:
             raise CustomException(e, sys)
 
     # ----------------- Public API -----------------
-    def run(self) -> UrlDataArtifact:
+    def run(self, return_data: bool = False) -> UrlDataArtifact | tuple[UrlDataArtifact, dict]:
         """
         Main execution method to scrape URLs for all search terms.
         
+        Args:
+            return_data: If True, also return the scraped data dict in addition to the artifact.
+        
         Returns:
-            UrlDataArtifact: Artifact containing path to saved URLs
-        """
+            - If return_data is False (default): UrlDataArtifact
+            - If return_data is True: (UrlDataArtifact, dict)  # (artifact, data)
+    """
         if not self.search_terms:
             raise CustomException(ValueError("At least one search_term is required."), sys)
         
@@ -340,8 +344,15 @@ class AmazonUrlScraper:
                 self.all_results[search_term] = self.urls[:target]
                 log.info(f"Collected {len(self.urls)} URLs for '{search_term}'")
             
-            self._save()
-            return UrlDataArtifact(url_file_path=self.url_cfg.url_file_path)
+            # Save and capture the data payload
+            final_payload = self._save()
+            
+            artifact = UrlDataArtifact(url_file_path=self.url_cfg.url_file_path)
+            
+            # Return both artifact and data if requested
+            if return_data:
+                return artifact, final_payload
+            return artifact
         
         except CustomException:
             raise
